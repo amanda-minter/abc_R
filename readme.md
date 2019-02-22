@@ -1,4 +1,4 @@
-`abc_speed`
+`abc_R`
 ==========
 
 Code for running case studies 1-2 in the manuscript entitled *Efficient methods for Approximate Bayesian Computation for infectious disease modelling* by Minter and Retkute.  
