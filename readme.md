@@ -1,7 +1,7 @@
 `abc_R`
 ==========
 
-Code for running case studies 1-2 in the manuscript entitled *Approximate Bayesian Computation for infectious disease modelling* by Minter and Retkute.  
+Code for running case studies 1-3 in the manuscript entitled *Approximate Bayesian Computation for infectious disease modelling* by Minter and Retkute.  
 
 
 Usage
