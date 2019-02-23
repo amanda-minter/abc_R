@@ -2,6 +2,9 @@ library(tmvtnorm)
  
 source('case_3_preamble.R')
 data <- read.csv(file.path("..", "data", "citrus_tristeza_data.csv"))
+# Status of data classified as: 0-  susceptable, 1 - infected in 1981; 2 - infected in 1982
+#  Indexes of infected trees
+inf0<-data$id[data$status==1] 
 
 # Number of neighbours for covariance matrix calculations
 M <- 50
