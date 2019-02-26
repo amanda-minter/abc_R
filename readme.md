@@ -1,5 +1,4 @@
 # abc_R
-==========
 
 This repository contains code for running case studies 1-3 in the manuscript entitled "Approximate Bayesian Computation for infectious disease modelling" by Minter and Retkute.  
 
@@ -11,7 +10,9 @@ This repository contains code for running case studies 1-3 in the manuscript ent
 Case study can be run in the following manner:
 
 `Rscript ABC_rejection_1.R`
+
 `Rscript ABC_rejection_2.R`
+
 `Rscript ABC_rejection_3.R`
 
 
@@ -19,7 +20,9 @@ Case study can be run in the following manner:
 Case study can be run in the following manner:
 
 `Rscript case_2_ABC.R`
+
 `Rscript case_2_ABC_SMC.R`
+
 `Rscript case_2_ABC_SMC_MNN.R`
 
 ### Case study 3: Stochastic individual-based model
