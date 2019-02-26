@@ -64,6 +64,7 @@ while(i <= N){ # While the number of accepted particles is less than N_particles
       res[i,]<-c(N0_star,age_sh_star,age_rt_star,beta_star,f_E_star)   
       # Update counter
       i <- i+1
+      print(i)
     }
 }
 

@@ -102,6 +102,7 @@ for(t in 1:T){
                 w.new[i] <- (m/n)*w1/w2
                 # Update counter
                 i <- i+1
+                print(paste0('Population: ', t, ", particle: ", i))
                 }
             } 
         }
