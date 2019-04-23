@@ -3,8 +3,10 @@ library(tmvtnorm)
 source('case_3_preamble.R')
 data <- read.csv(file.path("..", "data", "citrus_tristeza_data.csv"))
 # Status of data classified as: 0-  susceptable, 1 - infected in 1981; 2 - infected in 1982
-#  Indexes of infected trees
+#  Indexes of trees infected in 1981
 inf0<-data$id[data$status==1] 
+#  Indexes of trees infected in 1982
+inf1<-data$id[data$status==2] 
 
 # Number of neighbours for covariance matrix calculations
 M <- 50
@@ -16,7 +18,7 @@ N <- 1000
 n <- 1
 
 # Thresholds
-epsilon<- c(40, 30, 20, 10, 5, 3, 1)
+epsilon<- c(20, 15, 10, 7.5, 5, 4)
 
 # Number of populations
 T <- length(epsilon)
@@ -63,7 +65,7 @@ for(t in 1:T){
     			for(j in 1:n){
     				D_star<-run_model(alpha, beta)     
     				# Calculate distances 
-    				dist<-calc_distance(data$status, D_star)
+    				dist<-calc_distance(D_star)
     				distance[j] <-dist    
     				if(dist <= epsilon[t]){ # If distance is less than tolerance
     					m<-m+1

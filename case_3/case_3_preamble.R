@@ -6,20 +6,32 @@ K<- function(d, alpha){
 } 
 
 run_model<-function(alpha, beta){
-	inf<-rep(0, nrow(data))
-	inf[inf0]<-1
+	inf<-data.frame(id=inf0, day=rep(0,length(inf0)))
 	K1<-K(d, alpha)  
 	diag(K1) <- 0  
-	lambda <-as.numeric(beta* rowSums(K1[,inf0]) )
-	lambda[inf0]<-0 
-	u<-runif(length(lambda))
-	new.inf<-which(u<1-exp(-lambda))
-	if(length(new.inf)>0) inf[new.inf]<-2
-	return(inf)
+	t<-1
+	while(t<= 365){
+		lambda <-as.numeric((beta/365)* rowSums(K1[,inf$id]))
+		lambda[inf$id]<-0 
+		u<-runif(length(lambda))
+		new.inf<-which(u<1-exp(-lambda))
+		if(length(new.inf)>0) inf<-rbind(inf, data.frame(id=new.inf, day=t))
+		if(nrow(inf)==nrow(data)) t<-365
+		t<-t+1
+	}
+	return(inf[inf$day>0,])
 }
 
-calc_distance <- function(obs, sim){
-	abs(length(obs[obs==2])-length(sim[sim==2]))
+calc_distance <- function(inf){
+		near.dist.obs<-sapply(1:length(inf1), function(a) min(as.numeric(d[inf1[a], inf0])))
+	if(nrow(inf)>0) {
+		near.dist.sim<-sapply(1:nrow(inf), function(a) min(as.numeric(d[inf$id[a], inf0])))
+	}  else {
+		near.dist.sim<-0
+	}
+	n.obs<-sapply(1:length(uniq.dist), function(a) length(which(near.dist.obs==uniq.dist[a])))
+	n.sim<-sapply(1:length(uniq.dist), function(a) length(which(near.dist.sim==uniq.dist[a])))
+	return(sqrt(sum((n.obs-n.sim)^2)))
 }
 
 # Perturbation kernel 
