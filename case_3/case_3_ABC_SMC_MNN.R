@@ -18,10 +18,10 @@ N <- 1000
 n <- 1
 
 # Thresholds
-epsilon<- c(20, 15, 10, 7.5, 5, 4)
+epsilon<- c(20, 15, 10, 7.5, 5, 4.5)
 
-# Number of populations
-T <- length(epsilon)
+# Number of generations
+G <- length(epsilon)
 
 #  Lower and upper boundaries for priors
 lm.low<-c(0.01, 0)
@@ -38,14 +38,18 @@ w.new<-rep(NA, N)
 # Calculate the distances between trees
 xy <- cbind(data$x, data$y)
 d<- as.matrix(dist(xy, method = 'euclidean', diag = TRUE, upper = TRUE))
+#  Find a set of all distances between trees
+uniq.dist<-sort(unique(c(d)))
+# Calculate a number of observed minimal distances
+near.dist.obs<-sapply(1:length(inf1), function(a) min(as.numeric(d[inf1[a], inf0])))
+n.obs<-sapply(1:length(uniq.dist), function(a) length(which(near.dist.obs==uniq.dist[a])))
 
-
-for(t in 1:T){  
+for(g in 1:G){  
 
 	#Initiate counter
 	i<-1	
 	while(i <= N){ # While the number of accepted particles is less than N_particles
-   		if(t==1){
+   		if(g==1){
     			# Sample from prior distributions 
  			alpha<-runif(1,min=lm.low[1], max=lm.upp[1])
 			beta<-runif(1, min=lm.low[2], max=lm.upp[2])
@@ -65,9 +69,9 @@ for(t in 1:T){
     			for(j in 1:n){
     				D_star<-run_model(alpha, beta)     
     				# Calculate distances 
-    				dist<-calc_distance(D_star)
-    				distance[j] <-dist    
-    				if(dist <= epsilon[t]){ # If distance is less than tolerance
+    				calc.dist<-calc_distance(D_star)
+    				distance[j] <-calc.dist    
+    				if(calc.dist <= epsilon[g]){ # If distance is less than tolerance
     					m<-m+1
     				}
     			}	
@@ -76,7 +80,7 @@ for(t in 1:T){
     				res.new[i,]<-c(alpha, beta)  
       			# Calculate weights
       			w1<-prod(sapply(1:2, function(b) dunif(res.new[i,b], min=lm.low[b], max=lm.upp[b])))
-				if(t==1){
+				if(g==1){
 					w2<-1
 				} else {
 					w2<-sum(sapply(1:N, function(a) w.old[a]* dtmvnorm(res.new[i,], mean=res.old[a,], sigma=sigma, lower=lm.low, upper=lm.upp)))
@@ -84,7 +88,7 @@ for(t in 1:T){
       			w.new[i] <- (m/n)*w1/w2
       			# Update counter
       			i <- i+1
-      			print(paste0('Population: ', t, ", particle: ", i))
+      			print(paste0('Generation: ', g, ", particle: ", i))
       			}
     		} 
     	}
@@ -95,5 +99,5 @@ for(t in 1:T){
     	res.old<-res.new
 	w.old<-w.new/sum(w.new)
 
- 	write.csv(res.new, file = paste("results_case_3_ABC_SMC_MNN_pop_",t,".csv",sep=""), row.names=FALSE)
+ 	write.csv(res.new, file = paste("results_case_3_ABC_SMC_MNN_gen_",g,".csv",sep=""), row.names=FALSE)
 }

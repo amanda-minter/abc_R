@@ -22,14 +22,13 @@ run_model<-function(alpha, beta){
 	return(inf[inf$day>0,])
 }
 
+# The distance measure
 calc_distance <- function(inf){
-		near.dist.obs<-sapply(1:length(inf1), function(a) min(as.numeric(d[inf1[a], inf0])))
 	if(nrow(inf)>0) {
 		near.dist.sim<-sapply(1:nrow(inf), function(a) min(as.numeric(d[inf$id[a], inf0])))
 	}  else {
 		near.dist.sim<-0
 	}
-	n.obs<-sapply(1:length(uniq.dist), function(a) length(which(near.dist.obs==uniq.dist[a])))
 	n.sim<-sapply(1:length(uniq.dist), function(a) length(which(near.dist.sim==uniq.dist[a])))
 	return(sqrt(sum((n.obs-n.sim)^2)))
 }
