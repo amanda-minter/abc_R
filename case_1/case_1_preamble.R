@@ -25,7 +25,7 @@ run_model<-function(S0,beta,gamma){
   out<-lsoda(func = SIR,
                         y = c(S=S0,I=1,R=0),
                         parms = c(beta=beta,gamma=gamma),
-                        times = seq(1, 20,by=1))
+                        times = seq(1, 17,by=1))
   return(out[,c('I','R')])
 }
 

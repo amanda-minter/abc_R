@@ -2,10 +2,10 @@
 source('case_1_preamble.R')
 
 # Read in data file
-D <- read.csv(file.path("..", "data", "data.csv"))
+D <- read.csv("data.csv")
 
 # What was the last day of the epidemic
-t_final<-20
+t_final<-17
 
 # Extract final size
 final_size<-D[t_final,2]
@@ -34,7 +34,7 @@ while(i <= N){ # While the number of accepted particles is less than N_particles
   # Sample from prior distributions 
   S0_star<-rpois(1,100)
   beta_star<-runif(1,0,3)
-  gamma_star<-runif(1,0.,0.4)
+  gamma_star<-runif(1,0,1)
   
   # Simulate data set from the model
   D_star<-run_model(S0_star,beta_star,gamma_star)
