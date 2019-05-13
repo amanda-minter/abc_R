@@ -19,9 +19,9 @@ breaks_beta<-seq(beta_xlim[1],beta_xlim[2],l=15)
 breaks_gamma<-seq(gamma_xlim[1],gamma_xlim[2],l=15)
 breaks_R0<-seq(R0_xlim[1],R0_xlim[2],l=15)
 
-png('posteriors_case_1.png',width=2000,height=2000,units='px',res=300)
-par(mfrow=c(3,4),mar=c(4,2,2,2)+0.1)
-hist(ABC_1_res[,"S_0"],xlab=expression(S(0)),main='Initial no. susceptibles',col=cols[1],xlim=S_0_xlim,freq=F,ylim=S_0_ylim,breaks=breaks_S0)
+png('posteriors_case_1.png',width=4000,height=4000,units='px',res=300)
+par(mfrow=c(3,4),mar=c(4,2,2,2)+0.1,cex=1.5)
+hist(ABC_1_res[,"S_0"],xlab=expression(S(0)),main='Initial no. susceptibles',col=cols[1],xlim=S_0_xlim,freq=F,ylim=S_0_ylim,breaks=breaks_S0,cex=1.5)
 abline(v=99,col=4,lty=2,lwd=2)
 hist(ABC_1_res[,"beta"],xlab=expression(beta),main='Transmission rate',col=cols[1],xlim=beta_xlim,freq=F,ylim=beta_ylim,breaks=breaks_beta)
 abline(v=1.5,col=4,lty=2,lwd=2)
@@ -49,21 +49,14 @@ hist(ABC_3_res[,"beta"]/ABC_3_res[,"gamma"],xlab=expression(R[0]),main='',col=co
 abline(v=3,col=4,lty=2,lwd=2)
 dev.off()
 
-png('correlation_case_1.png',width=2000,height=1000,units='px',res=300)
-par(mfrow=c(1,3))
-plot(ABC_1_res[,"beta"],ABC_1_res[,"gamma"])
-plot(ABC_2_res[,"beta"],ABC_2_res[,"gamma"])
-plot(ABC_3_res[,"beta"],ABC_3_res[,"gamma"])
-dev.off()
-
 # Load the data
-data <- read.csv(file.path("..", "data", "data.csv"))
+data <- read.csv("data.csv")
 source("case_1_preamble.R")
 
 set.seed(20)
 ###plot of model outbreak
-png('model_run_case_1.png',width=2200,height=800,units='px',res=300)
-par(mfrow=c(1,3))
+png('model_run_case_1.png',width=4500,height=2000,units='px',res=300)
+par(mfrow=c(1,3),cex=1.5,mar=c(5,4,4,1)+0.1)
 plot(data[,1],pch=19,ylab='Number',xlab='Time (day)',col=2,ylim=c(0,max(data)),main='ABC-rejection 1')
 legend('topleft',c('Infected','Recovered'),pch=c(19,17),col=c(2,3),bty='n')
 for(j in 1:10){
