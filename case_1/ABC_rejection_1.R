@@ -16,8 +16,8 @@ colnames(res)<-c("S_0", "beta", "gamma", "distance")
 
 #### ABC algoirthm ####
 
-#Initiate counter
-i <- 1
+i <- 1 # Initiate counter of accepted particles
+j <- 1 # Initiate counter of proposed particles
 while(i <= N){ # While the number of accepted particles is less than N_particles
   
   # Sample from prior distributions 
@@ -37,6 +37,9 @@ while(i <= N){ # While the number of accepted particles is less than N_particles
     # Update counter
     i <- i + 1
   }
+  j <- j + 1 # Update counter
+  acc_rate <- i / j # Calculate the acceptance rate 
+  cat("current acceptance rate = ", acc_rate, "\r")
 }
 
 # Save data to csv file

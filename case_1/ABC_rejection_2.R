@@ -15,12 +15,12 @@ N <- 1000 # Number of accepted particles
 epsilon <- 1 # Epsilon value
 n_par <- 3 # How many parameters will be estimated
 res <- matrix(ncol = n_par + 1, nrow = N) # Empty matrix to store results
-colnames(res)<-c("S_0", "beta", "gamma", "distance")
+colnames(res) <- c("S_0", "beta", "gamma", "distance")
 
 #### ABC algoirthm ####
 
-#Initiate counter
-i <- 1
+i <- 1 # Initiate counter of accepted particles
+j <- 1 # Initiate counter of proposed particles
 while(i <= N){ # While the number of accepted particles is less than N_particles
   
   # Sample from prior distributions 
@@ -41,8 +41,11 @@ while(i <= N){ # While the number of accepted particles is less than N_particles
     # Store results
     res[i, ]<-c(S0_star, beta_star, gamma_star, distance)
     # Update counter
-    i <- i+1
+    i <- i+ 1
   }
+  j <- j + 1 # Update counter
+  acc_rate <- i / j # Calculate the acceptance rate 
+  cat("current acceptance rate = ", acc_rate, "\r")
 }
 # Save data to disk
 write.csv(res,'ABC_2_res.csv',row.names = F)
