@@ -41,8 +41,8 @@ lm.upp<-c(300*10^3, 1.4, 0.4, 5*10^(-6), 0.001)
 res<-matrix(ncol=5,nrow=N)
 
 
-#Initiate counter
-i<-1
+i <- 1 # Initiate counter of accepted particles
+j <- 1 # Initiate counter of proposed particles
 
 while(i <= N){ # While the number of accepted particles is less than N_particles
     
@@ -62,10 +62,11 @@ while(i <= N){ # While the number of accepted particles is less than N_particles
     if((distance[1] <= epsilon_T) & (distance[2] <= epsilon_A)){ # If both distances are less than their tolerances
       # Store results
       res[i,]<-c(N0_star,age_sh_star,age_rt_star,beta_star,f_E_star)   
-      # Update counter
-      i <- i+1
-      print(i)
+      i <- i + 1  # Update counter
     }
+	j <- j + 1 # Update counter
+	acc_rate <- i / j # Calculate the acceptance rate 
+	cat("current acceptance rate = ", round(acc_rate, 2), "\n")
 }
 
 write.csv(res, file = "results_case_2_ABC_.csv")
