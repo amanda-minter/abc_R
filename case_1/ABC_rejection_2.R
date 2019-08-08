@@ -17,7 +17,7 @@ n_par <- 3 # How many parameters will be estimated
 res <- matrix(ncol = n_par + 1, nrow = N) # Empty matrix to store results
 colnames(res) <- c("S_0", "beta", "gamma", "distance")
 
-#### ABC algoirthm ####
+#### ABC algorithm ####
 
 i <- 1 # Initiate counter of accepted particles
 j <- 1 # Initiate counter of proposed particles
