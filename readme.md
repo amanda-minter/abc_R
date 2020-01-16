@@ -28,7 +28,7 @@ Case study can be run in the following manner:
 ### Case study 3: Stochastic individual-based model
 Case study can be run in the following manner:
 
-`Rscript case_3_ABC_SMC_MNN.R’
+`Rscript case_3_ABC_SMC_MNN.R`
  
 
 ## Requirements
