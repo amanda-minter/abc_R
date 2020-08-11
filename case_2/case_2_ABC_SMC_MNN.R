@@ -12,7 +12,7 @@ n_age<-nrow(age)
 
 #  Observed percentage in three age groups
 msl_age_perc<-c(42, 30, 28) 
-cl.to.test<-c(1:5, 6:14, 15:21)
+cl.to.test<-list(1:5, 6:14, 15:21)
 
 #  Latent period
 nu<- 7 
