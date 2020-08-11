@@ -52,7 +52,7 @@ run_model<-function(N0, age_sh, age_rt, beta, f_E){
 	wc <- sapply(seq(1,length(cases)-7,7), function(i) sum(cases[i:(i+6)]))
 	
 	# Cases in three age groups
-	ac<-sapply(1:3, function(a) sum(cases_age[cl.to.test[a]]))
+	ac<-sapply(1:length(cl.to.test), function(a) sum(cases_age[cl.to.test[[a]]]))
 	
 	return(list(wc, ac))
 }
